@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAMBOL</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/atVD9rQ.png">
+<style>
+
+  :root {
+    --font-opciones: "Helvetica Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --color-opciones: #e00505;
+    --color-hover: #ff0000;
+    --tamano-gif: 60vw;
+    --max-gif: 500px;
+    --ancho-fuente: 0.7;
+  }
+
+
+  body {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 77%;
+    height: 100%;
+  }
+
+  #main-gif {
+    width: var(--tamano-gif);
+    max-width: var(--max-gif);
+    height: auto;
+    transition: transform 0.1s ease;
+  }
+
+
+  .options {
+    display: flex;
+    gap: -5.6rem; /* más cerca entre sí */
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .option {
+    text-decoration: none;
+    color: var(--color-opciones);
+    font-size: 2.4rem;
+    font-family: var(--font-opciones);
+    font-weight: 760;
+    letter-spacing: -4px;
+    transform: scaleX(var(--ancho-fuente));
+    display: inline-block;
+    transition:
+      transform 0s ease,
+      color 0.1s ease;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0);
+    padding: 0.05rem 0.4rem;
+  }
+
+  .option:hover {
+    transform: scaleX(var(--ancho-fuente)) scale(1.1) rotate(2deg);
+    color: var(--color-hover);
+  }
+
+
+  @media (max-width: 768px) {
+    .container {
+      margin-top: 5vh;
+    }
+
+    #main-gif {
+      width: 75vw;
+      max-width: 606px;
+    }
+
+    .options {
+      flex-direction: column;
+      gap: 0.1rem;
+      margin-top: 0.6rem;
+    }
+
+    .option {
+      font-size: 7.4rem;
+      letter-spacing: -2px;
+      padding: 0rem 1rem;
+    }
+
+    .option:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  @media (orientation: portrait) {
+    .container {
+      margin-top: 9vh;
+    }
+
+    #main-gif {
+      width: 49vw;
+      max-width: 606px;
+    }
+
+    .option {
+      font-size: 3rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <img id="main-gif" src="https://i.imgur.com/bzaZIOs.gif">
+
+    <div class="options">
+      <a href="https://open.spotify.com/intl-es/artist/6PwAPD6MdbeANzrK0MwpNC?si=-uQtBzcVSzeolHMy10Q00w" class="option" onmouseover="changeGif('https://i.imgur.com/LCud2Gv.png')" onmouseout="resetGif('https://i.imgur.com/bzaZIOs.gif')">ESCUCHANOS</a>
+      <a href="https://www.youtube.com/@hambol" class="option" onmouseover="changeGif('https://i.imgur.com/giMocst.png')" onmouseout="resetGif('https://i.imgur.com/bzaZIOs.gif')">VIDEOS</a>
+      <a href="merch.html" class="option" onmouseover="changeGif('https://i.imgur.com/qeOsCAd.png')" onmouseout="resetGif('https://i.imgur.com/bzaZIOs.gif')">MERCH</a>
+      <a href="shows.html" class="option" onmouseover="changeGif('https://i.imgur.com/fsLIrFB.png')" onmouseout="resetGif('https://i.imgur.com/bzaZIOs.gif')">SHOWS</a>
+    </div>
+  </div>
+
+  <script>
+    const mainGif = document.getElementById("main-gif");
+    const defaultGif = "https://i.imgur.com/bzaZIOs.gif";
+
+    function changeGif(newSrc) {
+      mainGif.src = newSrc;
+    }
+
+    function resetGif() {
+      mainGif.src = defaultGif;
+    }
+  </script>
+</body>
+</html>
