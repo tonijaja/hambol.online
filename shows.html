@@ -1,493 +1,499 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHOWS</title>
-<link rel="icon" type="image/png" href="https://i.imgur.com/atVD9rQ.png">
-<style>
-  :root {
-    --rojo: #e00505;
-    --rojo-hover: #ff0000;
-    --azul: #0b2fff;
-    --negro: #111111;
-    --font-display: "Helvetica Neue", "Helvetica Bold", Helvetica, Arial, sans-serif;
-    --font-mono: "Helvetica Neue", "Helvetica Bold", Helvetica, Arial, sans-serif;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SHOWS</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/atVD9rQ.png" />
+    <style>
+      :root {
+        --rojo: #e00505;
+        --rojo-hover: #ff0000;
+        --azul: #0b2fff;
+        --negro: #111111;
+        --font-display: "Helvetica Neue", "Helvetica Bold", Helvetica, Arial, sans-serif;
+        --font-mono: "Helvetica Neue", "Helvetica Bold", Helvetica, Arial, sans-serif;
+      }
 
-  * {
-    box-sizing: border-box;
-  }
+      * {
+        box-sizing: border-box;
+      }
 
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    background: #ffffff;
-    color: var(--negro);
-    font-family: var(--font-display);
-  }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        color: var(--negro);
+        font-family: var(--font-display);
+      }
 
-  a {
-    color: inherit;
-  }
+      a {
+        color: inherit;
+      }
 
-  .volver {
-    position: fixed;
-    top: 1.4rem;
-    left: 1.6rem;
-    text-decoration: none;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    color: var(--negro);
-    z-index: 10;
-    transition: color 0.15s ease;
-  }
+      .volver {
+        position: fixed;
+        top: 1.4rem;
+        left: 1.6rem;
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        color: var(--negro);
+        z-index: 10;
+        transition: color 0.15s ease;
+      }
 
-  .volver:hover {
-    color: var(--rojo);
-  }
+      .volver:hover {
+        color: var(--rojo);
+      }
 
-  main {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 6rem 1.5rem 5rem;
-  }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 6rem 1.5rem 5rem;
+      }
 
-  h1,
-  .titulo {
-    font-size: clamp(3rem, 11vw, 5.5rem);
-    font-weight: 800;
-    letter-spacing: -3px;
-    transform: scaleX(0.85);
-    transform-origin: left;
-    margin: 0 0 0.2rem;
-    color: var(--rojo);
-  }
+      h1,
+      .titulo {
+        font-size: clamp(3rem, 11vw, 5.5rem);
+        font-weight: 800;
+        letter-spacing: -3px;
+        transform: scaleX(0.85);
+        transform-origin: left;
+        margin: 0 0 0.2rem;
+        color: var(--rojo);
+      }
 
-  .subtitulo {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--negro);
-    margin: 0 0 3rem;
-  }
+      .subtitulo {
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--negro);
+        margin: 0 0 3rem;
+      }
 
-  /* ============================
-     LISTA DE SHOWS
-     ============================ */
-  .shows {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    margin-bottom: 4.5rem;
-  }
+      /* ============================
+         LISTA DE SHOWS
+         ============================ */
+      .shows {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-bottom: 4.5rem;
+      }
 
-  .show {
-    border: 3px solid var(--negro);
-    padding: 1.6rem 1.8rem;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 1.4rem;
-    position: relative;
-    overflow: hidden;
-  }
+      .show {
+        border: 3px solid var(--negro);
+        padding: 1.6rem 1.8rem;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 1.4rem;
+        position: relative;
+        overflow: hidden;
+      }
 
-  .show::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 8px;
-    background: var(--rojo);
-  }
+      .show::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 8px;
+        background: var(--rojo);
+      }
 
-  .show-fecha {
-    font-family: var(--font-mono);
-    font-size: 0.95rem;
-    line-height: 1.3;
-    white-space: nowrap;
-  }
+      .show-fecha {
+        font-family: var(--font-mono);
+        font-size: 0.95rem;
+        line-height: 1.3;
+        white-space: nowrap;
+      }
 
-  .show-fecha .dia {
-    display: block;
-    font-size: 2.4rem;
-    font-weight: 800;
-    font-family: var(--font-display);
-    color: var(--negro);
-    line-height: 1;
-  }
+      .show-fecha .dia {
+        display: block;
+        font-size: 2.4rem;
+        font-weight: 800;
+        font-family: var(--font-display);
+        color: var(--negro);
+        line-height: 1;
+      }
 
-  .show-info {
-    text-align: left;
-  }
+      .show-info {
+        text-align: left;
+      }
 
-  .show-lugar {
-    font-size: 1.4rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    margin: 0 0 0.2rem;
-  }
+      .show-lugar {
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        margin: 0 0 0.2rem;
+      }
 
-  .show-ciudad {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0.7;
-  }
+      .show-ciudad {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.7;
+      }
 
-  .show-estado {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: var(--rojo);
-    color: #fff;
-    padding: 0.55rem 0.9rem;
-    white-space: nowrap;
-    justify-self: end;
-    text-decoration: none;
-    font-weight: 800;
-    transition: background 0.15s ease;
-  }
+      .show-estado {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: var(--rojo);
+        color: #fff;
+        padding: 0.55rem 0.9rem;
+        white-space: nowrap;
+        justify-self: end;
+        text-decoration: none;
+        font-weight: 800;
+        transition: background 0.15s ease;
+      }
 
-  .show-estado:hover {
-    background: var(--rojo-hover);
-  }
+      .show-estado:hover {
+        background: var(--rojo-hover);
+      }
 
-  .show-detalle {
-    font-size: 0.95rem;
-    line-height: 1.35;
-    margin: 0.6rem 0 0;
-  }
+      .show-detalle {
+        font-size: 0.95rem;
+        line-height: 1.35;
+        margin: 0.6rem 0 0;
+      }
 
-  .sin-shows {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    opacity: 0.6;
-    padding: 2rem 0;
-  }
+      .sin-shows {
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        opacity: 0.6;
+        padding: 2rem 0;
+      }
 
-  @media (max-width: 560px) {
-    .show {
-      grid-template-columns: auto 1fr;
-    }
+      @media (max-width: 560px) {
+        .show {
+          grid-template-columns: auto 1fr;
+        }
 
-    .show-estado {
-      grid-column: 1 / -1;
-      justify-self: start;
-      margin-top: 0.4rem;
-    }
-  }
+        .show-estado {
+          grid-column: 1 / -1;
+          justify-self: start;
+          margin-top: 0.4rem;
+        }
+      }
 
-  /* ============================
-     CAJA "HAMBOL TOCA EN TU CASA"
-     ============================ */
-  .caja-casa {
-    border: 3px solid var(--negro);
-    padding: 2.2rem 1.8rem 2.4rem 2.2rem;
-    margin-bottom: 2.5rem;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-  }
+      /* ============================
+         CAJA "HAMBOL TOCA EN TU CASA"
+         ============================ */
+      .caja-casa {
+        border: 3px solid var(--negro);
+        padding: 2.2rem 1.8rem 2.4rem 2.2rem;
+        margin-bottom: 2.5rem;
+        text-align: left;
+        position: relative;
+        overflow: hidden;
+      }
 
-  .caja-casa::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 8px;
-    background: var(--rojo);
-  }
+      .caja-casa::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 8px;
+        background: var(--rojo);
+      }
 
-  .caja-casa .titulo {
-    margin: 0 0 1.2rem;
-    line-height: 0.95;
-  }
+      .caja-casa .titulo {
+        margin: 0 0 1.2rem;
+        line-height: 0.95;
+      }
 
-  .caja-casa p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin: 0 0 1.6rem;
-    max-width: 52ch;
-  }
+      .caja-casa p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin: 0 0 1.6rem;
+        max-width: 52ch;
+      }
 
-  .caja-casa .aclaracion {
-    font-size: 0.8rem;
-    opacity: 0.7;
-    margin: 0.2rem 0 0;
-  }
+      .caja-casa .aclaracion {
+        font-size: 0.8rem;
+        opacity: 0.7;
+        margin: 0.2rem 0 0;
+      }
 
-  .caja-casa .ciudad-form label {
-    color: var(--negro);
-  }
+      .caja-casa .ciudad-form label {
+        color: var(--negro);
+      }
 
-  .caja-casa .ciudad-form input {
-    color: var(--negro);
-    border-bottom-color: #11111155;
-  }
+      .caja-casa .ciudad-form input {
+        color: var(--negro);
+        border-bottom-color: #11111155;
+      }
 
-  .caja-casa .ciudad-form input::placeholder {
-    color: #11111155;
-  }
+      .caja-casa .ciudad-form input::placeholder {
+        color: #11111155;
+      }
 
-  .caja-casa .ciudad-form input:focus {
-    border-bottom-color: var(--rojo);
-  }
+      .caja-casa .ciudad-form input:focus {
+        border-bottom-color: var(--rojo);
+      }
 
-  .caja-casa .estado-envio.error {
-    color: var(--rojo);
-  }
+      .caja-casa .estado-envio.error {
+        color: var(--rojo);
+      }
 
-  /* ============================
-     CAJA "TU CIUDAD"
-     ============================ */
-  .caja-ciudad {
-    background: var(--negro);
-    color: #fff;
-    padding: 2.4rem 1.8rem;
-    text-align: left;
-  }
+      /* ============================
+         CAJA "TU CIUDAD"
+         ============================ */
+      .caja-ciudad {
+        background: var(--negro);
+        color: #fff;
+        padding: 2.4rem 1.8rem;
+        text-align: left;
+      }
 
-  .caja-ciudad h2 {
-    font-size: clamp(1.6rem, 5vw, 2.2rem);
-    font-weight: 800;
-    letter-spacing: -1px;
-    margin: 0 0 0.5rem;
-    color: var(--rojo);
-  }
+      .caja-ciudad h2 {
+        font-size: clamp(1.6rem, 5vw, 2.2rem);
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin: 0 0 0.5rem;
+        color: var(--rojo);
+      }
 
-  .caja-ciudad p {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    line-height: 1.5;
-    opacity: 0.85;
-    margin: 0 0 1.6rem;
-    max-width: 46ch;
-  }
+      .caja-ciudad p {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        line-height: 1.5;
+        opacity: 0.85;
+        margin: 0 0 1.6rem;
+        max-width: 46ch;
+      }
 
-  form.ciudad-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    max-width: 420px;
-  }
+      form.ciudad-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        max-width: 420px;
+      }
 
-  .ciudad-form label {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    opacity: 0.75;
-    margin-bottom: -0.4rem;
-  }
+      .ciudad-form label {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        opacity: 0.75;
+        margin-bottom: -0.4rem;
+      }
 
-  .ciudad-form input {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid #ffffff55;
-    color: #fff;
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    padding: 0.5rem 0.1rem;
-    outline: none;
-    transition: border-color 0.15s ease;
-  }
+      .ciudad-form input {
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #ffffff55;
+        color: #fff;
+        font-family: var(--font-mono);
+        font-size: 1rem;
+        padding: 0.5rem 0.1rem;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
 
-  .ciudad-form input::placeholder {
-    color: #ffffff55;
-  }
+      .ciudad-form input::placeholder {
+        color: #ffffff55;
+      }
 
-  .ciudad-form input:focus {
-    border-bottom-color: var(--rojo);
-  }
+      .ciudad-form input:focus {
+        border-bottom-color: var(--rojo);
+      }
 
-  .ciudad-form button {
-    margin-top: 0.6rem;
-    align-self: flex-start;
-    background: var(--rojo);
-    color: #fff;
-    border: none;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1rem;
-    letter-spacing: -0.3px;
-    padding: 0.8rem 1.8rem;
-    cursor: pointer;
-    transition:
-      background 0.15s ease,
-      transform 0.15s ease;
-  }
+      .ciudad-form button {
+        margin-top: 0.6rem;
+        align-self: flex-start;
+        background: var(--rojo);
+        color: #fff;
+        border: none;
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: -0.3px;
+        padding: 0.8rem 1.8rem;
+        cursor: pointer;
+        transition:
+          background 0.15s ease,
+          transform 0.15s ease;
+      }
 
-  .ciudad-form button:hover {
-    background: var(--rojo-hover);
-    transform: translateY(-1px);
-  }
+      .ciudad-form button:hover {
+        background: var(--rojo-hover);
+        transform: translateY(-1px);
+      }
 
-  .ciudad-form button:disabled {
-    opacity: 0.5;
-    cursor: default;
-    transform: none;
-  }
+      .ciudad-form button:disabled {
+        opacity: 0.5;
+        cursor: default;
+        transform: none;
+      }
 
-  .estado-envio {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    margin-top: 1rem;
-    min-height: 1.2em;
-  }
+      .estado-envio {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        margin-top: 1rem;
+        min-height: 1.2em;
+      }
 
-  .estado-envio.ok {
-    color: var(--rojo-hover);
-  }
+      .estado-envio.ok {
+        color: var(--rojo-hover);
+      }
 
-  .estado-envio.error {
-    color: #ff6b6b;
-  }
-</style>
-</head>
-<body>
-  <a class="volver" href="index.html">← HOME</a>
+      .estado-envio.error {
+        color: #ff6b6b;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="volver" href="home.html">← HOME</a>
 
-  <main>
-    <h1>SHOWS</h1>
-    <p class="subtitulo">Próximas fechas de Hambol</p>
+    <main>
+      <h1>SHOWS</h1>
+      <p class="subtitulo">Próximas fechas de Hambol</p>
 
-    <div class="shows">
-      <div class="show">
-        <div class="show-fecha">
-          DIC<span class="dia">05</span>
+      <div class="shows">
+        <div class="show">
+          <div class="show-fecha">
+            DIC<span class="dia">05</span>
+          </div>
+          <div class="show-info">
+            <p class="show-lugar">Beatflow</p>
+            <p class="show-ciudad">Buenos Aires</p>
+            <p class="show-detalle">
+              Presentación de <strong>Toda una familia</strong>, nuestro disco
+            </p>
+          </div>
+          <a
+            class="show-estado"
+            href="https://www.passline.com/eventos/hambol-toda-una-familia"
+            target="_blank"
+            rel="noopener"
+            >Sacar entradas</a
+          >
         </div>
-        <div class="show-info">
-          <p class="show-lugar">Beatflow</p>
-          <p class="show-ciudad">Buenos Aires</p>
-          <p class="show-detalle">
-            Presentación de <strong>Toda una familia</strong>, nuestro disco
-          </p>
-        </div>
-        <a class="show-estado" href="https://www.passline.com/eventos/hambol-toda-una-familia" target="_blank" rel="noopener">Sacar entradas</a>
+
+        <!-- Para sumar otro show, copiá el bloque .show de arriba y cambiá los datos -->
       </div>
 
-      <!-- Para sumar otro show, copiá el bloque .show de arriba y cambiá los datos -->
-    </div>
-
-    <section class="caja-casa">
-      <h2 class="titulo">HAMBOL TOCA EN TU CASA GRATIS</h2>
-      <p>
-        ¿Querés que Hambol toque en tu casa? Este 31 de octubre Hambol va a hacer una
-        gira por Buenos Aires. Si querés que toque en tu casa, podés postularte acá:
-      </p>
-
-      <form class="ciudad-form" id="form-casa">
-        <input type="hidden" name="_subject" value="Postulación: Hambol toca en tu casa">
-        <input type="hidden" name="formulario" value="Hambol toca en tu casa">
-
-        <label for="localidad">Localidad (barrio y ciudad)</label>
-        <input type="text" id="localidad" name="localidad" placeholder="Ej: Caballito, CABA" required="">
-
-        <label for="contacto-casa">Instagram, teléfono o contacto</label>
-        <input type="text" id="contacto-casa" name="contacto" placeholder="Para escribirte si salís sorteado" required="">
-
-        <button type="submit" id="btn-casa">Postularme</button>
-        <p class="aclaracion">
-          Los elegidos se definen por sorteo. Si salís elegido, te contactamos para
-          cerrar el horario :)
+      <section class="caja-casa">
+        <h2 class="titulo">HAMBOL TOCA EN TU CASA GRATIS</h2>
+        <p>
+          ¿Querés que Hambol toque en tu casa? Este 31 de octubre Hambol va a hacer una
+          gira por Buenos Aires. Si querés que toque en tu casa, podés postularte acá:
         </p>
-        <p class="estado-envio" id="estado-casa"></p>
-      </form>
-    </section>
 
-    <section class="caja-ciudad">
-      <h2>¿Querés que toquemos en tu ciudad?</h2>
-      <p>Dejanos tu ciudad y tu contacto y lo anotamos para armar la próxima gira.</p>
+        <form class="ciudad-form" id="form-casa">
+          <input type="hidden" name="_subject" value="Postulación: Hambol toca en tu casa" />
+          <input type="hidden" name="formulario" value="Hambol toca en tu casa" />
 
-      <form class="ciudad-form" id="form-ciudad">
-        <input type="hidden" name="_subject" value="Ciudad pedida para un show">
-        <input type="hidden" name="formulario" value="Tocar en tu ciudad">
+          <label for="localidad">Localidad (barrio y ciudad)</label>
+          <input type="text" id="localidad" name="localidad" placeholder="Ej: Caballito, CABA" required />
 
-        <label for="ciudad">Ciudad</label>
-        <input type="text" id="ciudad" name="ciudad" placeholder="Ej: Córdoba" required="">
+          <label for="contacto-casa">Instagram, teléfono o contacto</label>
+          <input type="text" id="contacto-casa" name="contacto" placeholder="Para escribirte si salís sorteado" required />
 
-        <label for="contacto">Instagram, mail o WhatsApp (opcional)</label>
-        <input type="text" id="contacto" name="contacto" placeholder="Para avisarte si se confirma">
+          <button type="submit" id="btn-casa">Postularme</button>
+          <p class="aclaracion">
+            Los elegidos se definen por sorteo. Si salís elegido, te contactamos para
+            cerrar el horario :)
+          </p>
+          <p class="estado-envio" id="estado-casa"></p>
+        </form>
+      </section>
 
-        <button type="submit" id="btn-enviar">Anotar mi ciudad</button>
-        <p class="estado-envio" id="estado-envio"></p>
-      </form>
-    </section>
-  </main>
+      <section class="caja-ciudad">
+        <h2>¿Querés que toquemos en tu ciudad?</h2>
+        <p>Dejanos tu ciudad y tu contacto y lo anotamos para armar la próxima gira.</p>
 
-  <script>
-    // ==========================================================
-    // Este formulario envía los pedidos de ciudad a Formspree
-    // (formspree.io), un servicio gratuito que guarda cada
-    // mensaje y te lo manda por mail. Hace falta:
-    //   1. Crear una cuenta gratis en https://formspree.io
-    //   2. Crear un formulario nuevo y copiar su ID
-    //   3. Reemplazar "TU_FORM_ID" acá abajo por ese ID
-    // ==========================================================
-    const FORM_ENDPOINT = "https://formspree.io/f/TU_FORM_ID";
+        <form class="ciudad-form" id="form-ciudad">
+          <input type="hidden" name="_subject" value="Ciudad pedida para un show" />
+          <input type="hidden" name="formulario" value="Tocar en tu ciudad" />
 
-    // Los dos formularios usan el mismo ID de Formspree; cada mensaje llega
-    // con el campo "formulario" y un asunto distinto para diferenciarlos.
-    function conectarFormulario(formId, botonId, estadoId, textoBoton, textoOk) {
-      const form = document.getElementById(formId);
-      const boton = document.getElementById(botonId);
-      const estado = document.getElementById(estadoId);
+          <label for="ciudad">Ciudad</label>
+          <input type="text" id="ciudad" name="ciudad" placeholder="Ej: Córdoba" required />
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        estado.textContent = "";
-        estado.className = "estado-envio";
-        boton.disabled = true;
-        boton.textContent = "Enviando...";
+          <label for="contacto">Instagram, mail o WhatsApp (opcional)</label>
+          <input type="text" id="contacto" name="contacto" placeholder="Para avisarte si se confirma" />
 
-        try {
-          const res = await fetch(FORM_ENDPOINT, {
-            method: "POST",
-            headers: { Accept: "application/json" },
-            body: new FormData(form),
-          });
+          <button type="submit" id="btn-enviar">Anotar mi ciudad</button>
+          <p class="estado-envio" id="estado-envio"></p>
+        </form>
+      </section>
+    </main>
 
-          if (res.ok) {
-            estado.textContent = textoOk;
-            estado.classList.add("ok");
-            form.reset();
-          } else {
-            throw new Error("fallo el envio");
+    <script>
+      // ==========================================================
+      // Este formulario envía los pedidos de ciudad a Formspree
+      // (formspree.io), un servicio gratuito que guarda cada
+      // mensaje y te lo manda por mail. Hace falta:
+      //   1. Crear una cuenta gratis en https://formspree.io
+      //   2. Crear un formulario nuevo y copiar su ID
+      //   3. Reemplazar "TU_FORM_ID" acá abajo por ese ID
+      // ==========================================================
+      const FORM_ENDPOINT = "https://formspree.io/f/xkjoponk";
+
+      // Los dos formularios usan el mismo ID de Formspree; cada mensaje llega
+      // con el campo "formulario" y un asunto distinto para diferenciarlos.
+      function conectarFormulario(formId, botonId, estadoId, textoBoton, textoOk) {
+        const form = document.getElementById(formId);
+        const boton = document.getElementById(botonId);
+        const estado = document.getElementById(estadoId);
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          estado.textContent = "";
+          estado.className = "estado-envio";
+          boton.disabled = true;
+          boton.textContent = "Enviando...";
+
+          try {
+            const res = await fetch(FORM_ENDPOINT, {
+              method: "POST",
+              headers: { Accept: "application/json" },
+              body: new FormData(form),
+            });
+
+            if (res.ok) {
+              estado.textContent = textoOk;
+              estado.classList.add("ok");
+              form.reset();
+            } else {
+              throw new Error("fallo el envio");
+            }
+          } catch (err) {
+            estado.textContent = "No se pudo enviar. Probá de nuevo en un rato.";
+            estado.classList.add("error");
+          } finally {
+            boton.disabled = false;
+            boton.textContent = textoBoton;
           }
-        } catch (err) {
-          estado.textContent = "No se pudo enviar. Probá de nuevo en un rato.";
-          estado.classList.add("error");
-        } finally {
-          boton.disabled = false;
-          boton.textContent = textoBoton;
-        }
-      });
-    }
+        });
+      }
 
-    conectarFormulario(
-      "form-casa",
-      "btn-casa",
-      "estado-casa",
-      "Postularme",
-      "¡Listo! Ya estás anotado para el sorteo.",
-    );
+      conectarFormulario(
+        "form-casa",
+        "btn-casa",
+        "estado-casa",
+        "Postularme",
+        "¡Listo! Ya estás anotado para el sorteo.",
+      );
 
-    conectarFormulario(
-      "form-ciudad",
-      "btn-enviar",
-      "estado-envio",
-      "Anotar mi ciudad",
-      "¡Gracias! Ya lo anotamos.",
-    );
-  </script>
-</body>
+      conectarFormulario(
+        "form-ciudad",
+        "btn-enviar",
+        "estado-envio",
+        "Anotar mi ciudad",
+        "¡Gracias! Ya lo anotamos.",
+      );
+    </script>
+  </body>
 </html>
