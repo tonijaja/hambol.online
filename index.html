@@ -150,7 +150,7 @@
       <video id="main-video" autoplay loop muted playsinline>
         <source src="ezgif-8b079ad726d7d9cc.webm" type="video/webm">
       </video>
-      <img id="hover-img" src="" alt="Hambol" style="display:none;">
+      <img id="hover-img" src="" alt="Hambol">
     </div>
 
     <div class="options">
@@ -165,15 +165,26 @@
     const mainVideo = document.getElementById("main-video");
     const hoverImg  = document.getElementById("hover-img");
 
+    // Precargar todas las imágenes de hover para que aparezcan instantáneo
+    const preload = ['escuchanos.png','videos.png','merch.png','shows.png'];
+    preload.forEach(src => { new Image().src = src; });
+
+    // Forzar autoplay en mobile al primer toque
+    document.addEventListener('touchstart', function() {
+      mainVideo.play();
+    }, { once: true });
+
     function changeGif(newSrc) {
       hoverImg.src = newSrc;
-      hoverImg.style.display = "block";
-      mainVideo.style.display = "none";
+      hoverImg.style.opacity = "1";
+      mainVideo.style.opacity = "0";
     }
 
     function resetGif() {
-      hoverImg.style.display = "none";
-      mainVideo.style.display = "block";
+      hoverImg.style.opacity = "0";
+      mainVideo.style.opacity = "1";
+      mainVideo.currentTime = 0;
+      mainVideo.play();
     }
   </script>
 
