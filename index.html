@@ -41,13 +41,23 @@
   #media-wrap {
     width: var(--tamano-gif);
     max-width: var(--max-gif);
+    position: relative;
+  }
+
+  /* imagen de referencia invisible que mantiene el alto del contenedor */
+  #media-wrap::after {
+    content: '';
+    display: block;
+    padding-top: 94%; /* aspect ratio aproximado de las imágenes — ajustá si hace falta */
   }
 
   #main-video,
   #hover-img {
+    position: absolute;
+    top: 0; left: 0;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    object-fit: contain;
   }
 
 
@@ -89,7 +99,7 @@
     }
 
     #media-wrap {
-      width: 75vw;
+      width: 92vw;
       max-width: 606px;
     }
 
@@ -116,7 +126,7 @@
     }
 
     #media-wrap {
-      width: 49vw;
+      width: 92vw;
       max-width: 606px;
     }
 
