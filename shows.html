@@ -23,9 +23,44 @@
       body {
         margin: 0;
         padding: 0;
-        background: #ffffff;
         color: var(--negro);
         font-family: var(--font-display);
+      }
+
+      /* Fondo: la imagen arriba, cada vez más rojo a medida que bajás.
+         Primera capa = degradé a rojo (se mueve con la página),
+         segunda capa = imagen (queda fija detrás). */
+      html {
+        min-height: 100%;
+        background-color: var(--rojo);
+      }
+
+      body {
+        position: relative;
+        min-height: 100vh;
+        background: transparent;
+      }
+
+      /* Capa 1 (al fondo): la imagen, fija, con un leve movimiento parallax (ver script) */
+      .fondo {
+        position: fixed;
+        top: -12vh;
+        bottom: -12vh;
+        left: 0;
+        right: 0;
+        z-index: -2;
+        background: url("https://i.imgur.com/WrkD2sb.png") center / cover no-repeat;
+        will-change: transform;
+      }
+
+      /* Capa 2: el rojo que va tapando la imagen a medida que bajás */
+      body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(to bottom, rgba(224, 5, 5, 0) 15%, var(--rojo) 55%);
+        pointer-events: none;
       }
 
       a {
@@ -40,13 +75,17 @@
         font-family: var(--font-mono);
         font-size: 0.85rem;
         letter-spacing: 0.05em;
-        color: var(--negro);
+        font-weight: 800;
+        background: var(--rojo);
+        color: #fff;
+        padding: 0.55rem 0.9rem;
+        border: 3px solid var(--negro);
         z-index: 10;
-        transition: color 0.15s ease;
+        transition: background 0.15s ease;
       }
 
       .volver:hover {
-        color: var(--rojo);
+        background: var(--rojo-hover);
       }
 
       main {
@@ -71,7 +110,7 @@
         font-size: 0.9rem;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: var(--negro);
+        color: #fff;
         margin: 0 0 3rem;
       }
 
@@ -87,6 +126,8 @@
 
       .show {
         border: 3px solid var(--negro);
+        background: var(--negro);
+        color: #fff;
         padding: 1.6rem 1.8rem;
         display: grid;
         grid-template-columns: auto 1fr auto;
@@ -118,7 +159,7 @@
         font-size: 2.4rem;
         font-weight: 800;
         font-family: var(--font-display);
-        color: var(--negro);
+        color: #fff;
         line-height: 1;
       }
 
@@ -189,6 +230,7 @@
          CAJA "HAMBOL TOCA EN TU CASA"
          ============================ */
       .caja-casa {
+        background: #ffffff;
         border: 3px solid var(--negro);
         padding: 2.2rem 1.8rem 2.4rem 2.2rem;
         margin-bottom: 2.5rem;
@@ -354,7 +396,8 @@
     </style>
   </head>
   <body>
-    <a class="volver" href="home.html">← HOME</a>
+    <div class="fondo" id="fondo" aria-hidden="true"></div>
+    <a class="volver" href="https://hambol.online">← HOME</a>
 
     <main>
       <h1>SHOWS</h1>
@@ -434,6 +477,33 @@
     </main>
 
     <script>
+      // Parallax leve: la imagen de fondo se desplaza despacito mientras scrolleás
+      (function () {
+        const fondo = document.getElementById("fondo");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        let pendiente = false;
+        function actualizar() {
+          pendiente = false;
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          const progreso = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0;
+          const recorrido = window.innerHeight * 0.1; // cuánto se mueve en total
+          fondo.style.transform = "translate3d(0," + (-progreso * recorrido).toFixed(1) + "px,0)";
+        }
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!pendiente) {
+              pendiente = true;
+              requestAnimationFrame(actualizar);
+            }
+          },
+          { passive: true },
+        );
+        window.addEventListener("resize", actualizar);
+        actualizar();
+      })();
+
       // ==========================================================
       // Este formulario envía los pedidos de ciudad a Formspree
       // (formspree.io), un servicio gratuito que guarda cada
