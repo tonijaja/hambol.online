@@ -1,8 +1,6 @@
 
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">   
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MERCH</title>
-        <link rel="icon" type="image/png" href="https://i.imgur.com/atVD9rQ.png">
+<!-- saved from url=(0035)https://hambol.neocities.org/merch3 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500&display=swap");
   * {
@@ -821,8 +819,7 @@
     margin-bottom: 16px;
   }
   .wpp-title {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
+    font-family: "Anton", sans-serif;
     font-size: 20px;
     margin-bottom: 8px;
   }
@@ -879,8 +876,7 @@
     color: #fff;
     border: none;
     padding: 13px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
+    font-family: "Anton", sans-serif;
     font-size: 14px;
     letter-spacing: 0.05em;
     cursor: pointer;
@@ -958,22 +954,24 @@
 
 </head><body><div class="page">
   <div class="hdr">
-    <a class="logo" href="index.html"><img src="https://i.imgur.com/AUrpjIf.png" alt="Hambol"></a>
+    <a class="logo" href="https://hambol.online"><img src="https://i.imgur.com/AUrpjIf.png" alt="Hambol"></a>
     <div class="cart-icon" onclick="toggleCart()">
-      <img src="https://i.imgur.com/TK7qlIa.png" alt="Carrito">
+      <img src="./merch3_files/TK7qlIa.png" alt="Carrito">
       <div class="cart-badge" id="cart-badge">0</div>
     </div>
   </div>
   <div class="filters">
-    <button class="flt" onclick="openGrid('remeras')">REMERAS</button><span class="sep">/</span>
-    <button class="flt" onclick="openGrid('gorras')">GORRAS</button><span class="sep">/</span>
-    <button class="flt" onclick="openGrid('tazas')">TAZAS</button><span class="sep">/</span>
-    <button class="flt" onclick="openGrid('stickers')">STICKERS</button><span class="sep">/</span>
-    <button class="flt" onclick="openGrid('all')">TODO</button>
+    <button class="flt" onclick="openGrid(&#39;remeras&#39;)">REMERAS</button><span class="sep">/</span>
+    <button class="flt" onclick="openGrid(&#39;gorras&#39;)">GORRAS</button><span class="sep">/</span>
+    <button class="flt" onclick="openGrid(&#39;tazas&#39;)">TAZAS</button><span class="sep">/</span>
+    <button class="flt" onclick="openGrid(&#39;stickers&#39;)">STICKERS</button><span class="sep">/</span>
+    <button class="flt" onclick="openGrid(&#39;all&#39;)">TODO</button>
   </div>
   <div class="models-section">
-    <div class="carousel-wrap dragging" id="carousel-wrap">
-      <div class="models-track" id="models-track"></div><div class="hint">← deslizá para ver →</div>
+    <div class="carousel-wrap" id="carousel-wrap">
+      <div class="models-track" id="models-track"><div class="model-slot" data-idx="0" style="bottom: 0px; left: 0px; transform-origin: center bottom; transform: translateX(816.738px) translateY(-10px) scale(1.2); opacity: 2.45; filter: brightness(0.45); z-index: 90; pointer-events: auto;"><div class="model-ph"><div class="model-ph-fig"><img src="./merch3_files/23ovpq5.png" alt="Modelo 1" draggable="false"></div></div></div><div class="model-slot" data-idx="1" style="bottom: 0px; left: 0px; transform-origin: center bottom; transform: translateX(520.293px) translateY(-6.4px) scale(1.23); opacity: 0; filter: brightness(0.483); z-index: 91; pointer-events: none;"><div class="model-ph"><div class="model-ph-fig"><img src="./merch3_files/G1vK3qg.png" alt="Modelo 2" draggable="false"></div></div></div><div class="model-slot" data-idx="2" style="bottom: 0px; left: 0px; transform-origin: center bottom; opacity: 2.45; pointer-events: auto; transform: translateX(509.538px) translateY(-10px) scale(1.2); filter: brightness(0.45); z-index: 90;"><div class="model-ph"><div class="model-ph-fig"><img src="./merch3_files/djQyTnm.png" alt="Modelo 3" draggable="false"></div></div></div><div class="model-slot" data-idx="3" style="bottom: 0px; left: 0px; transform-origin: center bottom; transform: translateX(688.779px) translateY(49px) scale(1.7); opacity: 3; filter: brightness(1); z-index: 100; pointer-events: auto;"><div class="model-ph"><div class="model-ph-fig"><img src="./merch3_files/xJ7UgMx.png" alt="Modelo 4" draggable="false"></div></div></div></div>
+    </div>
+    <div class="hint">&#8592; deslizá para ver &#8594;</div>
   </div>
   <div style="height: 60px"></div>
 </div>
@@ -1001,17 +999,11 @@
 
 <div class="size-popup" id="size-popup">
   <button class="pp-close" onclick="closeSizeChart()">×</button>
-  <div class="sp-title">Tabla de talles</div>
-  <div class="sp-sub">Medidas en cm (prenda extendida)</div>
+  <div class="sp-title" id="sp-title">Tabla de talles</div>
+  <div class="sp-sub">Medidas en cm · Calce oversize</div>
   <table class="sp-table">
     <thead><tr><th>Talle</th><th>Ancho</th><th>Largo</th></tr></thead>
-    <tbody>
-      <tr><td>XS</td><td>48</td><td>66</td></tr>
-      <tr><td>S</td><td>51</td><td>69</td></tr>
-      <tr><td>M</td><td>54</td><td>72</td></tr>
-      <tr><td>L</td><td>57</td><td>75</td></tr>
-      <tr><td>XL</td><td>60</td><td>78</td></tr>
-    </tbody>
+    <tbody id="sp-body"></tbody>
   </table>
 </div>
 
@@ -1100,11 +1092,15 @@
       cat: "remeras",
       price: 23000,
       type: "remera",
-      colorVariants: [
-        { name: "Azul", hex: "#0B3FE8", img: "https://i.imgur.com/wER7dfv.png" },
-        { name: "Roja", hex: "#E8170F", img: "https://i.imgur.com/dNm5beT.png" }
+      sizeChart: [
+        { talle: "XS", ancho: 56, largo: 74 },
+        { talle: "S", ancho: 56, largo: 75 }
       ],
-      sizes: ["XS", "S", "M", "L", "XL"],
+      colorVariants: [
+        { name: "Azul", hex: "#0B3FE8", img: "https://i.imgur.com/wER7dfv.png", sizes: ["XS"] },
+        { name: "Roja", hex: "#E8170F", img: "https://i.imgur.com/dNm5beT.png", sizes: ["S"] }
+      ],
+      sizes: ["XS", "S"],
       soldout: []
     },
     {
@@ -1113,11 +1109,15 @@
       cat: "remeras",
       price: 23000,
       type: "remera",
-      colorVariants: [
-        { name: "Blanca", hex: "#fff", img: "https://i.imgur.com/fZ6MfEV.png" },
-        { name: "Roja", hex: "#E8170F", img: "https://i.imgur.com/APSB8YT.png", soldout: true }
+      sizeChart: [
+        { talle: "XS", ancho: 56, largo: 74 },
+        { talle: "S", ancho: 56, largo: 75 }
       ],
-      sizes: ["XS", "S", "M", "L", "XL"],
+      colorVariants: [
+        { name: "Roja", hex: "#E8170F", img: "https://i.imgur.com/APSB8YT.png" },
+        { name: "Blanca", hex: "#fff", img: "https://i.imgur.com/fZ6MfEV.png", soldout: true }
+      ],
+      sizes: ["XS", "S"],
       soldout: []
     },
     {
@@ -1127,7 +1127,8 @@
       price: 26000,
       type: "remera",
       img: "https://i.imgur.com/pkdKfuA.png",
-      sizes: ["XS", "S", "M", "L", "XL"],
+      sizeChart: [{ talle: "S", ancho: 55, largo: 64 }],
+      sizes: ["S"],
       soldout: []
     },
     {
@@ -1162,7 +1163,7 @@
       price: 1200,
       img,
       sizes: ["Única"],
-      soldout: [],
+      soldout: ["Única"],
       type: "sticker-single"
     })),
     {
@@ -1172,7 +1173,7 @@
       price: 3000,
       img: "https://i.imgur.com/nPqGNAN.png",
       sizes: ["Única"],
-      soldout: [],
+      soldout: ["Única"],
       type: "sticker-promo"
     },
     {
@@ -1425,6 +1426,13 @@
     const vi = selectedVariant[p.id] ?? 0;
     return !!p.colorVariants[vi].soldout;
   }
+  function sizesFor(p) {
+    if (p.colorVariants) {
+      const v = p.colorVariants[selectedVariant[p.id] ?? 0];
+      if (v && v.sizes) return v.sizes;
+    }
+    return p.sizes;
+  }
   function isBlocked(p) {
     return !!p.comingSoon || isSoldOut(p) || currentVariantSoldOut(p);
   }
@@ -1445,7 +1453,9 @@
     }
     if (p.type === "sticker-promo" && !selectedPromoStickers[p.id]) selectedPromoStickers[p.id] = [];
     if (p.colors && !selectedColor[p.id]) selectedColor[p.id] = p.colors[0].hex;
-    if (!selectedSize[p.id]) selectedSize[p.id] = p.sizes.find((s) => !p.soldout.includes(s)) || p.sizes[0];
+    const sizeList = sizesFor(p);
+    if (!sizeList.includes(selectedSize[p.id]))
+      selectedSize[p.id] = sizeList.find((s) => !p.soldout.includes(s)) || sizeList[0];
 
     document.getElementById("pp-cat").textContent = p.cat.toUpperCase();
     document.getElementById("pp-name").textContent = p.name;
@@ -1517,7 +1527,7 @@
     }
 
     // sizes
-    document.getElementById("pp-sizes").innerHTML = p.sizes
+    document.getElementById("pp-sizes").innerHTML = sizeList
       .map(
         (s) => `
     <button class="size-btn${s === selectedSize[p.id] ? " active" : ""}${p.soldout.includes(s) ? " soldout" : ""}"
@@ -1526,7 +1536,7 @@
       .join("");
 
     // size chart button only for remeras
-    document.getElementById("size-chart-btn").style.display = p.type === "remera" ? "inline-block" : "none";
+    document.getElementById("size-chart-btn").style.display = p.sizeChart ? "inline-block" : "none";
 
     // action buttons state
     const addBtn = document.getElementById("pp-add-btn");
@@ -1546,6 +1556,12 @@
   }
 
   function openSizeChart() {
+    const p = currentProduct;
+    if (!p || !p.sizeChart) return;
+    document.getElementById("sp-title").textContent = "Talles · " + p.name;
+    document.getElementById("sp-body").innerHTML = p.sizeChart
+      .map((r) => `<tr><td>${r.talle}</td><td>${r.ancho}</td><td>${r.largo}</td></tr>`)
+      .join("");
     document.getElementById("size-popup").classList.add("show");
   }
   function closeSizeChart() {
