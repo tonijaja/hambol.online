@@ -44,10 +44,10 @@
       /* Capa 1 (al fondo): la imagen, fija, con un leve movimiento parallax (ver script) */
       .fondo {
         position: fixed;
-        top: -12vh;
-        bottom: -12vh;
+        top: 0;
         left: 0;
         right: 0;
+        height: 130vh; /* el script lo ajusta al largo real de la página */
         z-index: -2;
         background: url("https://i.imgur.com/WrkD2sb.png") center / cover no-repeat;
         will-change: transform;
@@ -105,6 +105,11 @@
         color: var(--rojo);
       }
 
+      /* El título principal va en blanco; el de "Hambol toca en tu casa" queda rojo */
+      h1 {
+        color: #fff;
+      }
+
       .subtitulo {
         font-family: var(--font-mono);
         font-size: 0.9rem;
@@ -126,8 +131,8 @@
 
       .show {
         border: 3px solid var(--negro);
-        background: var(--negro);
-        color: #fff;
+        background: #ffffff;
+        color: var(--negro);
         padding: 1.6rem 1.8rem;
         display: grid;
         grid-template-columns: auto 1fr auto;
@@ -159,7 +164,7 @@
         font-size: 2.4rem;
         font-weight: 800;
         font-family: var(--font-display);
-        color: #fff;
+        color: var(--negro);
         line-height: 1;
       }
 
@@ -230,7 +235,8 @@
          CAJA "HAMBOL TOCA EN TU CASA"
          ============================ */
       .caja-casa {
-        background: #ffffff;
+        background: var(--negro);
+        color: #fff;
         border: 3px solid var(--negro);
         padding: 2.2rem 1.8rem 2.4rem 2.2rem;
         margin-bottom: 2.5rem;
@@ -267,35 +273,38 @@
         margin: 0.2rem 0 0;
       }
 
-      .caja-casa .ciudad-form label {
-        color: var(--negro);
-      }
-
-      .caja-casa .ciudad-form input {
-        color: var(--negro);
-        border-bottom-color: #11111155;
-      }
-
-      .caja-casa .ciudad-form input::placeholder {
-        color: #11111155;
-      }
-
-      .caja-casa .ciudad-form input:focus {
-        border-bottom-color: var(--rojo);
-      }
-
-      .caja-casa .estado-envio.error {
-        color: var(--rojo);
-      }
 
       /* ============================
          CAJA "TU CIUDAD"
          ============================ */
       .caja-ciudad {
-        background: var(--negro);
-        color: #fff;
+        background: #ffffff;
+        color: var(--negro);
+        border: 3px solid var(--negro);
         padding: 2.4rem 1.8rem;
         text-align: left;
+      }
+
+      /* Campos del formulario sobre fondo blanco */
+      .caja-ciudad .ciudad-form label {
+        color: var(--negro);
+      }
+
+      .caja-ciudad .ciudad-form input {
+        color: var(--negro);
+        border-bottom-color: #11111155;
+      }
+
+      .caja-ciudad .ciudad-form input::placeholder {
+        color: #11111155;
+      }
+
+      .caja-ciudad .ciudad-form input:focus {
+        border-bottom-color: var(--rojo);
+      }
+
+      .caja-ciudad .estado-envio.error {
+        color: var(--rojo);
       }
 
       .caja-ciudad h2 {
@@ -482,13 +491,17 @@
         const fondo = document.getElementById("fondo");
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+        // VELOCIDAD: cuánto se mueve la imagen respecto del scroll.
+        // 0 = totalmente fija, 0.3 = leve (como está), 0.6 = fuerte.
+        const VELOCIDAD = 0.3;
+
         let pendiente = false;
         function actualizar() {
           pendiente = false;
-          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-          const progreso = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0;
-          const recorrido = window.innerHeight * 0.1; // cuánto se mueve en total
-          fondo.style.transform = "translate3d(0," + (-progreso * recorrido).toFixed(1) + "px,0)";
+          const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+          // la imagen es más alta que la pantalla lo justo para no mostrar bordes
+          fondo.style.height = window.innerHeight + maxScroll * VELOCIDAD + "px";
+          fondo.style.transform = "translate3d(0," + (-window.scrollY * VELOCIDAD).toFixed(1) + "px,0)";
         }
         window.addEventListener(
           "scroll",
