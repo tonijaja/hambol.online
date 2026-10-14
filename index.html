@@ -48,7 +48,7 @@
 
   .options {
     display: flex;
-    gap: -5.6rem; /* más cerca entre sí */
+    gap: -5.6rem;
     margin-top: 2rem;
     flex-wrap: wrap;
     justify-content: center;
@@ -123,27 +123,57 @@
 </head>
 <body>
   <div class="container">
-    <img id="main-gif" src="https://i.imgur.com/bzaZIOs.gif">
+
+    <video id="main-gif"
+      autoplay loop muted playsinline
+      width="500"
+      poster="https://i.imgur.com/bzaZIOs.gif">
+      <source src="ezgif-8b079ad726d7d9cc.webm" type="video/webm">
+      <!-- fallback por si el webm no carga -->
+      <img src="https://i.imgur.com/bzaZIOs.gif" alt="Hambol">
+    </video>
 
     <div class="options">
-      <a href="https://open.spotify.com/intl-es/artist/6PwAPD6MdbeANzrK0MwpNC?si=-uQtBzcVSzeolHMy10Q00w" class="option" onmouseover="changeGif('https://i.imgur.com/LCud2Gv.png')" onmouseout="resetGif('https://i.imgur.com/bzaZIOs.gif')">ESCUCHANOS</a>
-      <a href="https://www.youtube.com/@hambol" class="option" onmouseover="changeGif('https://i.imgur.com/giMocst.png')" onmouseout="resetGif('https://i.imgur.com/bzaZIOs.gif')">VIDEOS</a>
-      <a href="merch.html" class="option" onmouseover="changeGif('https://i.imgur.com/qeOsCAd.png')" onmouseout="resetGif('https://i.imgur.com/bzaZIOs.gif')">MERCH</a>
-      <a href="shows.html" class="option" onmouseover="changeGif('https://i.imgur.com/fsLIrFB.png')" onmouseout="resetGif('https://i.imgur.com/bzaZIOs.gif')">SHOWS</a>
+      <a href="https://open.spotify.com/intl-es/artist/6PwAPD6MdbeANzrK0MwpNC?si=-uQtBzcVSzeolHMy10Q00w" class="option" onmouseover="changeGif('https://i.imgur.com/LCud2Gv.png')" onmouseout="resetGif()">ESCUCHANOS</a>
+      <a href="https://www.youtube.com/@hambol" class="option" onmouseover="changeGif('https://i.imgur.com/giMocst.png')" onmouseout="resetGif()">VIDEOS</a>
+      <a href="merch.html" class="option" onmouseover="changeGif('https://i.imgur.com/qeOsCAd.png')" onmouseout="resetGif()">MERCH</a>
+      <a href="shows.html" class="option" onmouseover="changeGif('https://i.imgur.com/fsLIrFB.png')" onmouseout="resetGif()">SHOWS</a>
     </div>
   </div>
 
   <script>
-    const mainGif = document.getElementById("main-gif");
-    const defaultGif = "https://i.imgur.com/bzaZIOs.gif";
+    const mainVideo = document.getElementById("main-gif");
+    const defaultSrc = "ezgif-8b079ad726d7d9cc.webm";
+    let isHovering = false;
 
     function changeGif(newSrc) {
-      mainGif.src = newSrc;
+      isHovering = true;
+      // Cambia a imagen estática en hover
+      mainVideo.style.display = "none";
+      let img = document.getElementById("hover-img");
+      if (!img) {
+        img = document.createElement("img");
+        img.id = "hover-img";
+        img.style.cssText = mainVideo.style.cssText;
+        img.setAttribute("width", mainVideo.getAttribute("width"));
+        // copia las clases y el id de estilo
+        img.id = "hover-img";
+        img.style.width = "var(--tamano-gif)";
+        img.style.maxWidth = "var(--max-gif)";
+        img.style.height = "auto";
+        mainVideo.parentNode.insertBefore(img, mainVideo);
+      }
+      img.src = newSrc;
+      img.style.display = "block";
     }
 
     function resetGif() {
-      mainGif.src = defaultGif;
+      isHovering = false;
+      mainVideo.style.display = "block";
+      const img = document.getElementById("hover-img");
+      if (img) img.style.display = "none";
     }
   </script>
+
 </body>
 </html>
