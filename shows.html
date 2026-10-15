@@ -455,17 +455,31 @@
         <h2 class="titulo">HAMBOL TOCA EN TU CASA GRATIS</h2>
         <p>
           ¿Querés que Hambol toque en tu casa? Este 31 de octubre Hambol va a hacer una
-          gira por Buenos Aires, tocando en varios lugares EL MISMO DÍA!!! Si querés que Hambol toque en tu casa, hay que postularse.
+          gira por Buenos Aires, tocando en varios lugares EL MISMO DÍA!!!
         </p>
 
-        <p class="cupos-llenos"><strong>¡CUPOS LLENOS!</strong> Ya recibimos un montón de postulaciones y por ahora cerramos la inscripción.</p>
+        <p class="cupos-llenos"><strong>¡CUPOS LLENOS!</strong> Ya recibimos un montón de postulaciones y por ahora cerramos la inscripción. Pronto vamos a estar contando cómo lo vamos a hacer.</p>
       </section>
 
       <section class="caja-ciudad">
-        <h2>¿Querés que toquemos en tu ciudad?</h2>
-        <p>Dejanos tu ciudad y tu contacto y lo anotamos para armar la próxima gira.</p>
+        <h2>¿Querés que toquemos en tu país?</h2>
+        <p>Dejanos tu país, tu provincia y tu contacto y lo anotamos para armar la próxima gira.</p>
 
-        <p class="cupos-llenos"><strong>¡CUPOS LLENOS!</strong> Ya recibimos un montón de postulaciones y por ahora cerramos la inscripción.</p>
+        <form class="ciudad-form" id="form-ciudad">
+          <input type="hidden" name="formulario" value="Tocar en tu país" />
+
+          <label for="pais">País</label>
+          <input type="text" id="pais" name="pais" placeholder="Ej: Chile" required />
+
+          <label for="provincia">Provincia o estado</label>
+          <input type="text" id="provincia" name="provincia" placeholder="Ej: Córdoba" required />
+
+          <label for="contacto">Instagram, mail o WhatsApp (opcional)</label>
+          <input type="text" id="contacto" name="contacto" placeholder="Para avisarte si se confirma" />
+
+          <button type="submit" id="btn-enviar">Anotar mi lugar</button>
+          <p class="estado-envio" id="estado-envio"></p>
+        </form>
       </section>
     </main>
 
@@ -500,6 +514,61 @@
         window.addEventListener("resize", actualizar);
         actualizar();
       })();
+
+      // ==========================================================
+      // Los formularios guardan cada envío en una Google Sheet,
+      // a través de un Google Apps Script (ver apps-script.gs).
+      // Pegá acá abajo la URL del script publicado (termina en /exec).
+      // ==========================================================
+      const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbzbdgbExmNxrOXF9jLzCK3VSNoEltDQ9pEcWKnuKFLQqBnZ8pYtQYsmnFzlrzRcICCl/exec";
+
+      // Los dos formularios usan la misma URL; el campo oculto "formulario"
+      // le dice al script en qué pestaña de la planilla guardar cada uno.
+      function conectarFormulario(formId, botonId, estadoId, textoBoton, textoOk) {
+        const form = document.getElementById(formId);
+        const boton = document.getElementById(botonId);
+        const estado = document.getElementById(estadoId);
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          estado.textContent = "";
+          estado.className = "estado-envio";
+          boton.disabled = true;
+          boton.textContent = "Enviando...";
+
+          try {
+            if (FORM_ENDPOINT.indexOf("script.google.com") === -1) {
+              throw new Error("falta configurar FORM_ENDPOINT");
+            }
+
+            // no-cors: Google no devuelve respuesta legible desde otra página,
+            // pero el envío se guarda igual. Si la red falla, cae al catch.
+            await fetch(FORM_ENDPOINT, {
+              method: "POST",
+              mode: "no-cors",
+              body: new URLSearchParams(new FormData(form)),
+            });
+
+            estado.textContent = textoOk;
+            estado.classList.add("ok");
+            form.reset();
+          } catch (err) {
+            estado.textContent = "No se pudo enviar. Probá de nuevo en un rato.";
+            estado.classList.add("error");
+          } finally {
+            boton.disabled = false;
+            boton.textContent = textoBoton;
+          }
+        });
+      }
+
+      conectarFormulario(
+        "form-ciudad",
+        "btn-enviar",
+        "estado-envio",
+        "Anotar mi lugar",
+        "¡Gracias! Ya anotamos tu lugar.",
+      );
     </script>
   </body>
 </html>
