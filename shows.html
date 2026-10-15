@@ -402,6 +402,21 @@
       .estado-envio.error {
         color: #ff6b6b;
       }
+    
+      .cupos-llenos {
+        font-size: 1.05rem;
+        line-height: 1.5;
+        margin: 0;
+        max-width: 46ch;
+      }
+
+      .cupos-llenos strong {
+        color: var(--rojo);
+        display: block;
+        font-size: 1.4rem;
+        letter-spacing: -0.5px;
+        margin-bottom: 0.3rem;
+      }
     </style>
   </head>
   <body>
@@ -440,48 +455,17 @@
         <h2 class="titulo">HAMBOL TOCA EN TU CASA GRATIS</h2>
         <p>
           ¿Querés que Hambol toque en tu casa? Este 31 de octubre Hambol va a hacer una
-          gira por Buenos Aires, tocando en varios lugares EL MISMO DÍA!!! Si querés que Hambol toque en tu casa, podés postularte acá:
+          gira por Buenos Aires, tocando en varios lugares EL MISMO DÍA!!! Si querés que Hambol toque en tu casa, hay que postularse.
         </p>
 
-        <form class="ciudad-form" id="form-casa">
-          <input type="hidden" name="_subject" value="Postulación: Hambol toca en tu casa" />
-          <input type="hidden" name="formulario" value="Hambol toca en tu casa" />
-
-          <label for="nombre-casa">Nombre</label>
-          <input type="text" id="nombre-casa" name="nombre" placeholder="Tu nombre" required />
-
-          <label for="localidad">Localidad (barrio y ciudad)</label>
-          <input type="text" id="localidad" name="localidad" placeholder="Ej: Caballito, CABA" required />
-
-          <label for="contacto-casa">Instagram, teléfono o contacto</label>
-          <input type="text" id="contacto-casa" name="contacto" placeholder="Para escribirte si vamos a tu casa" required />
-
-          <button type="submit" id="btn-casa">Postularme</button>
-          <p class="aclaracion">
-            Los elegidos se definen por sorteo. Si salís elegido, te contactamos para
-            cerrar el horario :) INVITÁ A TUS AMIGOS!!!
-          </p>
-          <p class="estado-envio" id="estado-casa"></p>
-        </form>
+        <p class="cupos-llenos"><strong>¡CUPOS LLENOS!</strong> Ya recibimos un montón de postulaciones y por ahora cerramos la inscripción.</p>
       </section>
 
       <section class="caja-ciudad">
         <h2>¿Querés que toquemos en tu ciudad?</h2>
         <p>Dejanos tu ciudad y tu contacto y lo anotamos para armar la próxima gira.</p>
 
-        <form class="ciudad-form" id="form-ciudad">
-          <input type="hidden" name="_subject" value="Ciudad pedida para un show" />
-          <input type="hidden" name="formulario" value="Tocar en tu ciudad" />
-
-          <label for="ciudad">Ciudad</label>
-          <input type="text" id="ciudad" name="ciudad" placeholder="Ej: Córdoba" required />
-
-          <label for="contacto">Instagram, mail o WhatsApp (opcional)</label>
-          <input type="text" id="contacto" name="contacto" placeholder="Para avisarte si se confirma" />
-
-          <button type="submit" id="btn-enviar">Anotar mi ciudad</button>
-          <p class="estado-envio" id="estado-envio"></p>
-        </form>
+        <p class="cupos-llenos"><strong>¡CUPOS LLENOS!</strong> Dentro de poco volvemos a abrir esto!!!</p>
       </section>
     </main>
 
@@ -516,70 +500,6 @@
         window.addEventListener("resize", actualizar);
         actualizar();
       })();
-
-      // ==========================================================
-      // Este formulario envía los pedidos de ciudad a Formspree
-      // (formspree.io), un servicio gratuito que guarda cada
-      // mensaje y te lo manda por mail. Hace falta:
-      //   1. Crear una cuenta gratis en https://formspree.io
-      //   2. Crear un formulario nuevo y copiar su ID
-      //   3. Reemplazar "TU_FORM_ID" acá abajo por ese ID
-      // ==========================================================
-      const FORM_ENDPOINT = "https://formspree.io/f/xkjoponk";
-
-      // Los dos formularios usan el mismo ID de Formspree; cada mensaje llega
-      // con el campo "formulario" y un asunto distinto para diferenciarlos.
-      function conectarFormulario(formId, botonId, estadoId, textoBoton, textoOk) {
-        const form = document.getElementById(formId);
-        const boton = document.getElementById(botonId);
-        const estado = document.getElementById(estadoId);
-
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          estado.textContent = "";
-          estado.className = "estado-envio";
-          boton.disabled = true;
-          boton.textContent = "Enviando...";
-
-          try {
-            const res = await fetch(FORM_ENDPOINT, {
-              method: "POST",
-              headers: { Accept: "application/json" },
-              body: new FormData(form),
-            });
-
-            if (res.ok) {
-              estado.textContent = textoOk;
-              estado.classList.add("ok");
-              form.reset();
-            } else {
-              throw new Error("fallo el envio");
-            }
-          } catch (err) {
-            estado.textContent = "No se pudo enviar. Probá de nuevo en un rato.";
-            estado.classList.add("error");
-          } finally {
-            boton.disabled = false;
-            boton.textContent = textoBoton;
-          }
-        });
-      }
-
-      conectarFormulario(
-        "form-casa",
-        "btn-casa",
-        "estado-casa",
-        "Postularme",
-        "¡Listo! Ya estás anotado para el sorteo.",
-      );
-
-      conectarFormulario(
-        "form-ciudad",
-        "btn-enviar",
-        "estado-envio",
-        "Anotar mi ciudad",
-        "¡Gracias! Ya lo anotamos.",
-      );
     </script>
   </body>
 </html>
