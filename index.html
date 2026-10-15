@@ -38,32 +38,11 @@
     height: 100%;
   }
 
-  #media-wrap {
+  #main-gif {
     width: var(--tamano-gif);
     max-width: var(--max-gif);
-    position: relative;
-  }
-
-  /* imagen de referencia invisible que mantiene el alto del contenedor */
-  #media-wrap::after {
-    content: '';
+    height: auto;
     display: block;
-    padding-top: 94%; /* aspect ratio aproximado de las imágenes — ajustá si hace falta */
-  }
-
-  #main-video,
-  .hover-img {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: opacity 0.05s;
-  }
-
-  .hover-img {
-    opacity: 0;
-    pointer-events: none;
   }
 
 
@@ -104,7 +83,7 @@
       margin-top: 5vh;
     }
 
-    #media-wrap {
+    #main-gif {
       width: 92vw;
       max-width: 606px;
     }
@@ -145,48 +124,27 @@
 <body>
   <div class="container">
 
-    <!-- contenedor para video + imagen hover, mismo tamaño -->
-    <div id="media-wrap">
-      <video id="main-video" autoplay loop muted playsinline>
-        <source src="ezgif-8b079ad726d7d9cc.webm" type="video/webm">
-      </video>
-      <img class="hover-img" data-key="escuchanos" src="escuchanos.png" alt="Escuchanos">
-      <img class="hover-img" data-key="videos"      src="videos.png"      alt="Videos">
-      <img class="hover-img" data-key="merch"       src="merch.png"       alt="Merch">
-      <img class="hover-img" data-key="shows"       src="shows.png"       alt="Shows">
-    </div>
+    <img id="main-gif" src="https://i.imgur.com/bzaZIOs.gif" alt="Hambol">
 
     <div class="options">
-      <a href="https://open.spotify.com/intl-es/artist/6PwAPD6MdbeANzrK0MwpNC?si=-uQtBzcVSzeolHMy10Q00w" class="option" onmouseover="changeGif('escuchanos')" onmouseout="resetGif()">ESCUCHANOS</a>
-      <a href="https://www.youtube.com/@hambol" class="option" onmouseover="changeGif('videos')" onmouseout="resetGif()">VIDEOS</a>
-      <a href="merch.html" class="option" onmouseover="changeGif('merch')" onmouseout="resetGif()">MERCH</a>
-      <a href="shows.html" class="option" onmouseover="changeGif('shows')" onmouseout="resetGif()">SHOWS</a>
+      <a href="https://open.spotify.com/intl-es/artist/6PwAPD6MdbeANzrK0MwpNC?si=-uQtBzcVSzeolHMy10Q00w" class="option" onmouseover="changeGif('https://i.imgur.com/LCud2Gv.png')" onmouseout="resetGif()">ESCUCHANOS</a>
+      <a href="https://www.youtube.com/@hambol" class="option" onmouseover="changeGif('https://i.imgur.com/giMocst.png')" onmouseout="resetGif()">VIDEOS</a>
+      <a href="merch.html" class="option" onmouseover="changeGif('https://i.imgur.com/qeOsCAd.png')" onmouseout="resetGif()">MERCH</a>
+      <a href="shows.html" class="option" onmouseover="changeGif('https://i.imgur.com/fsLIrFB.png')" onmouseout="resetGif()">SHOWS</a>
     </div>
   </div>
 
   <script>
-    const mainVideo = document.getElementById("main-video");
-    const hoverImg  = document.getElementById("hover-img");
 
-    const imgs = document.querySelectorAll('.hover-img');
+    const mainGif = document.getElementById("main-gif");
+    const defaultSrc = "https://i.imgur.com/bzaZIOs.gif";
 
-    // Forzar autoplay en mobile al primer toque
-    document.addEventListener('touchstart', function() {
-      mainVideo.play();
-    }, { once: true });
-
-    function changeGif(key) {
-      imgs.forEach(img => {
-        img.style.opacity = img.dataset.key === key ? "1" : "0";
-      });
-      mainVideo.style.opacity = "0";
+    function changeGif(newSrc) {
+      mainGif.src = newSrc;
     }
 
     function resetGif() {
-      imgs.forEach(img => img.style.opacity = "0");
-      mainVideo.style.opacity = "1";
-      mainVideo.currentTime = 0;
-      mainVideo.play();
+      mainGif.src = defaultSrc;
     }
   </script>
 
