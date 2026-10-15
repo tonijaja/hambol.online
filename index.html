@@ -52,7 +52,7 @@
   }
 
   #main-video,
-  #hover-img {
+  .hover-img {
     position: absolute;
     top: 0; left: 0;
     width: 100%;
@@ -61,7 +61,7 @@
     transition: opacity 0.05s;
   }
 
-  #hover-img {
+  .hover-img {
     opacity: 0;
     pointer-events: none;
   }
@@ -150,14 +150,17 @@
       <video id="main-video" autoplay loop muted playsinline>
         <source src="ezgif-8b079ad726d7d9cc.webm" type="video/webm">
       </video>
-      <img id="hover-img" src="" alt="Hambol">
+      <img class="hover-img" data-key="escuchanos" src="escuchanos.png" alt="Escuchanos">
+      <img class="hover-img" data-key="videos"      src="videos.png"      alt="Videos">
+      <img class="hover-img" data-key="merch"       src="merch.png"       alt="Merch">
+      <img class="hover-img" data-key="shows"       src="shows.png"       alt="Shows">
     </div>
 
     <div class="options">
-      <a href="https://open.spotify.com/intl-es/artist/6PwAPD6MdbeANzrK0MwpNC?si=-uQtBzcVSzeolHMy10Q00w" class="option" onmouseover="changeGif('escuchanos.png')" onmouseout="resetGif()">ESCUCHANOS</a>
-      <a href="https://www.youtube.com/@hambol" class="option" onmouseover="changeGif('videos.png')" onmouseout="resetGif()">VIDEOS</a>
-      <a href="merch.html" class="option" onmouseover="changeGif('merch.png')" onmouseout="resetGif()">MERCH</a>
-      <a href="shows.html" class="option" onmouseover="changeGif('shows.png')" onmouseout="resetGif()">SHOWS</a>
+      <a href="https://open.spotify.com/intl-es/artist/6PwAPD6MdbeANzrK0MwpNC?si=-uQtBzcVSzeolHMy10Q00w" class="option" onmouseover="changeGif('escuchanos')" onmouseout="resetGif()">ESCUCHANOS</a>
+      <a href="https://www.youtube.com/@hambol" class="option" onmouseover="changeGif('videos')" onmouseout="resetGif()">VIDEOS</a>
+      <a href="merch.html" class="option" onmouseover="changeGif('merch')" onmouseout="resetGif()">MERCH</a>
+      <a href="shows.html" class="option" onmouseover="changeGif('shows')" onmouseout="resetGif()">SHOWS</a>
     </div>
   </div>
 
@@ -165,23 +168,22 @@
     const mainVideo = document.getElementById("main-video");
     const hoverImg  = document.getElementById("hover-img");
 
-    // Precargar todas las imágenes de hover para que aparezcan instantáneo
-    const preload = ['escuchanos.png','videos.png','merch.png','shows.png'];
-    preload.forEach(src => { new Image().src = src; });
+    const imgs = document.querySelectorAll('.hover-img');
 
     // Forzar autoplay en mobile al primer toque
     document.addEventListener('touchstart', function() {
       mainVideo.play();
     }, { once: true });
 
-    function changeGif(newSrc) {
-      hoverImg.src = newSrc;
-      hoverImg.style.opacity = "1";
+    function changeGif(key) {
+      imgs.forEach(img => {
+        img.style.opacity = img.dataset.key === key ? "1" : "0";
+      });
       mainVideo.style.opacity = "0";
     }
 
     function resetGif() {
-      hoverImg.style.opacity = "0";
+      imgs.forEach(img => img.style.opacity = "0");
       mainVideo.style.opacity = "1";
       mainVideo.currentTime = 0;
       mainVideo.play();
